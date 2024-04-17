@@ -2,14 +2,16 @@ import { View,Text } from "react-native"
 import BookmarkButton from "./BookmarkButton"
 import { COLOR } from "./color"
 import AlarmButton from "./AlarmButton"
-import NextBusINfo from "./NextBusINfo"
+import NextBusInfo from "./NextBusInfo"
 
 export default ({
     isBookmarked,
     onPressBookmark,
     num,
     numColor,
-    directionDescription
+    directionDescription,
+    processedNextBusInfos,
+
 }) => {
    
     return (
@@ -31,16 +33,15 @@ export default ({
             <View style={{ flex: 1, flexDirection: "row", alignContent:"center"}}>
                 {/* 남은시간/ n번째 전 / 여유 */}
                 <View style={{ flex:1 }}>
-                   <NextBusINfo
-                        hasInfo={true}
-                        remainTimeText={"8분 0초"}
-                        numOfRemainedStops={5}
-                        seatStatusText={"여유"}
-                   />
-                    <NextBusINfo
-                        hasInfo={false}
-                        remainTimeText="도착정보 없음"
-                   />
+                    {processedNextBusInfos.map( info => (
+                             <NextBusInfo
+                                 hasInfo={info.hasInfo}
+                                 remainTimeText={info.remainTimeText}
+                                 numOfRemainedStops={info.numOfRemainedStops}
+                                 seatStatusText={info.seatStatusText}
+                            />
+                    ))}
+                
                 </View>
                 <AlarmButton onPress={() => {}} style={{paddingHorizontal: 15}}/>
             </View>

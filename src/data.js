@@ -1,3 +1,4 @@
+
 import dayjs from 'dayjs';
 import { COLOR } from './color';
 
@@ -229,16 +230,18 @@ export const getSections = (buses) => {
   return sections;
 };
 
+
+
 export const getBusNumColorByType = (type) => {
   switch (type) {
-    case "B":
-      return COLOR.BUS_B;
-    case "G":
-      return COLOR.BUS_G;
-    case "R":
-      return COLOR.BUS_R;
-    default:
-      return "transparent";
+     case "B":
+        return COLOR.BUS_B;
+     case "G":
+         return COLOR.BUS_G;
+     case "R":
+         return COLOR.BUS_R;
+     default: 
+        return "transparent";
   }
 }
 
