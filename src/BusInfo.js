@@ -33,10 +33,11 @@ export default ({
             <View style={{ flex: 1, flexDirection: "row", alignContent:"center"}}>
                 {/* 남은시간/ n번째 전 / 여유 */}
                 <View style={{ flex:1 }}>
-                    {processedNextBusInfos.map( info => (
+                    {processedNextBusInfos.map( (info, index) => (
                              <NextBusInfo
+                                key={`next-bus-info-${index}`}
                                  hasInfo={info.hasInfo}
-                                 remainTimeText={info.remainTimeText}
+                                 remainTimeText={info.remainedTimeText}
                                  numOfRemainedStops={info.numOfRemainedStops}
                                  seatStatusText={info.seatStatusText}
                             />
