@@ -6,12 +6,13 @@ export default ({
     isBookmarked,
     onPress,
     style,
+    size
 }) => {
     return (
         <TouchableOpacity style={style} onPress={onPress}>
             <Ionicons 
                 name="star" 
-                size={24} 
+                size={size} 
                 color={isBookmarked ? COLOR.YELLOW : COLOR.GRAY_1} 
             />
         </TouchableOpacity>

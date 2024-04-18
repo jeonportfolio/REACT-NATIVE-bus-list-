@@ -12,7 +12,7 @@ export const busStop = {
       type: "B",
       num: 146,
       directionDescription: "강남역.강남역사거리",
-      isBookmarked: false,
+      isBookmarked: true,
       nextBusInfos: [
         {
           arrivalTime: dayjs().add(8, 'minute'),
