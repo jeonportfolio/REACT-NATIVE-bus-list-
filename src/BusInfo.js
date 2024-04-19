@@ -15,8 +15,12 @@ export default ({
 }) => {
    
     return (
-        <View style= {{ flexDirection:"row" }}>
-            <View style={{ flex: 1, flexDirection:"row", alignItems:"center"}}>
+        <View style= {{ flexDirection:"row" , height:70 }}>
+            <View style={{ 
+                flex: 1, 
+                flexDirection:"row", 
+                alignItems:"center"
+            }}>
                 {/* 북마크 */}
                 <BookmarkButton
                     size={20}
@@ -31,7 +35,7 @@ export default ({
                 </View>
                 
             </View>
-            <View style={{ flex: 1, flexDirection: "row", alignContent:"center"}}>
+            <View style={{ flex:1, flexDirection: "row", alignContent:"center"}}>
                 {/* 남은시간/ n번째 전 / 여유 */}
                 <View style={{ flex:1 }}>
                     {processedNextBusInfos.map( (info, index) => (
