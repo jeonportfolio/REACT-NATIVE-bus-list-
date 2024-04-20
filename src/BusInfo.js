@@ -15,7 +15,7 @@ export default ({
 }) => {
    
     return (
-        <View style= {{ flexDirection:"row" , height:70 }}>
+        <View style= {{ flexDirection:"row" , height:70, backgroundColor:"#fff"}}>
             <View style={{ 
                 flex: 1, 
                 flexDirection:"row", 

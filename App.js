@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import dayjs from 'dayjs';
-import { SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import BusInfo from './src/BusInfo';
 import { COLOR } from './src/color';
 import { busStop, getBusNumColorByType, getRemainedTimeText, getSeatStatusText, getSections } from './src/data';
@@ -15,29 +15,22 @@ const busStopBookmarkPadding = 6;
 export default function App() {
   const sections = getSections(busStop.buses);
   const [ now, setNow ] = useState(dayjs());
+  const [ refreshing, setRefreshing ] = useState(false);
 
   const onPressBusStopBookmark = () => {
     
   }
 
   const ListHeaderComponent = () => (
-    <SafeAreaView style={{ 
+    <View style={{ 
       backgroundColor: COLOR.GRAY_3,
-      height: 230,
+      height: 220,
+      justifyContent: "center", 
+      alignItems:"center"
       }}>
-      {/* 뒤로가기와 홈아이콘 */}
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <TouchableOpacity style = {{ padding: 10 }}>
-            <SimpleLineIcons name="arrow-left" size={20} color={COLOR.WHITE} /> 
-        </TouchableOpacity>
-        <TouchableOpacity style = {{ padding: 10 }}>
-            <SimpleLineIcons name="home" size={20} color={COLOR.WHITE}/>
-        </TouchableOpacity>
-      </View>
+      
       {/* 정류소 번호, 이름, 방향 */}
-      <View style={{ justifyContent: "center", alignItems:"center"}}>
-          <Margin height={10}/>
-          
+      <Margin height={10}/>
           <Text style= {{color: COLOR.WHITE, fontSize: 13}}>{busStop.id}</Text>
           <Margin height={4}/>
 
@@ -60,9 +53,9 @@ export default function App() {
              
           />
           <Margin height={25} />
-      </View>
+      
       {/* 북마크 */}
-    </SafeAreaView>
+    </View>
   )
   
   const renderSectionHeader = ({ section: {title}}) => (
@@ -133,6 +126,19 @@ export default function App() {
     <Margin height={30}/>
   }
 
+  const onRefresh = () => {
+      console.log('call onRefresh')
+      setRefreshing (true);
+  }
+
+  useEffect( () => {
+      if (refreshing){
+        setTimeout(() => {
+          setRefreshing(false);
+          setNow(dayjs());
+        },3000);
+      } 
+  },[refreshing])
 
   useEffect( () => {
        const interval = setInterval(() => {
@@ -146,6 +152,33 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+    
+      {/* 뒤로가기와 홈아이콘 */}
+     <View style={{ 
+        backgroundColor: COLOR.GRAY_3, 
+        width:"100%" 
+      }}>
+      <SafeAreaView style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <TouchableOpacity style = {{ padding: 10 }}>
+            <SimpleLineIcons name="arrow-left" size={20} color={COLOR.WHITE} /> 
+        </TouchableOpacity>
+        <TouchableOpacity style = {{ padding: 10 }}>
+            <SimpleLineIcons name="home" size={20} color={COLOR.WHITE}/>
+        </TouchableOpacity>
+      </SafeAreaView>
+      
+      {/* 헤더 스크롤 이질감 방지 가상요소 */}
+      <View style= {{ 
+      
+          position:"absolute", 
+          width: "100%", 
+          height: 500, 
+          backgroundColor: COLOR.GRAY_3,
+          zIndex: -1
+      
+      }}>  
+      </View> 
+    </View> 
       <SectionList
           style= {{ flex:1, width: "100%"}}
           sections={sections}
@@ -154,6 +187,13 @@ export default function App() {
           renderItem={renderItem}
           ItemSeparatorComponent={ItemSeparatorComponent}
           ListFooterComponent={ListFooterComponent}
+          refreshControl={
+            <RefreshControl 
+                  refreshing={refreshing} 
+                  onRefresh={onRefresh}
+                  // onRefresh= 스크롤의 y축의 값이 0에 도달했을때 실행되는 함수 
+            />
+          }
       />
     </View>
   );
