@@ -17,7 +17,7 @@ export default ({
     return (
         <View style= {{ flexDirection:"row" , height:70, backgroundColor:"#fff"}}>
             <View style={{ 
-                flex: 1, 
+                flex: 0.8, 
                 flexDirection:"row", 
                 alignItems:"center"
             }}>
@@ -31,11 +31,11 @@ export default ({
                 {/* 버스번호, 방향 */}
                 <View style={{flex:1}}>
                     <Text style={{ color: numColor, fontSize: 20}}>{num}</Text>
-                    <Text style={{ fontSize:13, color: COLOR.GRAY_3}}>{directionDescription}</Text>
+                    <Text style={{ fontSize:13, color: COLOR.GRAY_3, marginRight:5 }}>{directionDescription}</Text>
                 </View>
                 
             </View>
-            <View style={{ flex:1, flexDirection: "row", alignContent:"center"}}>
+            <View style={{ flex:1, flexDirection: "row", alignContent:"center", marginTop:5}}>
                 {/* 남은시간/ n번째 전 / 여유 */}
                 <View style={{ flex:1 }}>
                     {processedNextBusInfos.map( (info, index) => (
