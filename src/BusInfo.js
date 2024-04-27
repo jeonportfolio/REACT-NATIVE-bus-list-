@@ -5,6 +5,7 @@ import AlarmButton from "./AlarmButton"
 import NextBusInfo from "./NextBusInfo"
 
 export default ({
+    NEWCOLOR,
     isBookmarked,
     onPressBookmark,
     num,
@@ -15,7 +16,7 @@ export default ({
 }) => {
    
     return (
-        <View style= {{ flexDirection:"row" , height:70, backgroundColor:"#fff"}}>
+        <View style= {{ flexDirection:"row" , height:70, backgroundColor: NEWCOLOR.WHITE_BLACK }}>
             <View style={{ 
                 flex: 0.8, 
                 flexDirection:"row", 
@@ -23,6 +24,7 @@ export default ({
             }}>
                 {/* 북마크 */}
                 <BookmarkButton
+                    NEWCOLOR={NEWCOLOR}
                     size={20}
                     isBookmarked={isBookmarked}
                     onPress={onPressBookmark}
@@ -40,6 +42,7 @@ export default ({
                 <View style={{ flex:1 }}>
                     {processedNextBusInfos.map( (info, index) => (
                              <NextBusInfo
+                                NEWCOLOR={NEWCOLOR}
                                 key={`next-bus-info-${index}`}
                                  hasInfo={info.hasInfo}
                                  remainTimeText={info.remainedTimeText}
@@ -49,7 +52,7 @@ export default ({
                     ))}
                 
                 </View>
-                <AlarmButton onPress={() => {}} style={{paddingHorizontal: 15}}/>
+                <AlarmButton NEWCOLOR= {NEWCOLOR} onPress={() => {}} style={{paddingHorizontal: 15}}/>
             </View>
         </View>
     )
